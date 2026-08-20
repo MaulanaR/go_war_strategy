@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#171913">
+  <title>Frontline Command</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section id="lobby" class="lobby panel">
+      <div class="eyebrow">GO WAR STRATEGY</div>
+      <h1>Frontline Command</h1>
+      <p class="lede">RTS parit real-time untuk browser. Bangun pasukan, rebut garis depan, dan hancurkan markas lawan.</p>
+
+      <div class="mode-grid">
+        <button id="soloButton" class="mode-card primary" type="button">
+          <span class="mode-kicker">MODE 01</span>
+          <strong>Solo vs AI</strong>
+          <small>Langsung bermain melawan komandan komputer.</small>
+        </button>
+        <button id="createButton" class="mode-card" type="button">
+          <span class="mode-kicker">MODE 02</span>
+          <strong>Buat Room</strong>
+          <small>Dapatkan kode unik untuk dibagikan ke teman.</small>
+        </button>
+      </div>
+
+      <form id="joinForm" class="join-form">
+        <label for="roomCode">Punya kode room?</label>
+        <div class="join-row">
+          <input id="roomCode" name="roomCode" inputmode="text" maxlength="6" autocomplete="off" placeholder="ABC123" aria-label="Kode room">
+          <button type="submit">Gabung</button>
+        </div>
+      </form>
+      <p id="lobbyStatus" class="status" role="status"></p>
+      <p class="originality-note">Prototype ini memakai kode dan visual orisinal, tanpa aset dari game referensi.</p>
+    </section>
+
+    <section id="battle" class="battle hidden" aria-live="polite">
+      <header class="topbar panel">
+        <div>
+          <span class="label">ROOM</span>
+          <button id="copyCode" class="room-code" type="button" title="Salin kode room">SOLO</button>
+        </div>
+        <div class="match-meta">
+          <span id="phaseText">MENUNGGU</span>
+          <span id="timer">00:00</span>
+        </div>
+        <div class="resource-box">
+          <span class="label">SUPPLY</span>
+          <strong id="resources">0</strong>
+        </div>
+      </header>
+
+      <div class="canvas-frame">
+        <canvas id="gameCanvas" width="1280" height="720" aria-label="Medan pertempuran"></canvas>
+        <div id="waitingOverlay" class="overlay hidden">
+          <div class="overlay-card panel">
+            <span class="eyebrow">ROOM SIAP</span>
+            <h2>Menunggu lawan</h2>
+            <p>Bagikan kode <strong id="waitingCode"></strong> agar pemain kedua dapat bergabung.</p>
+          </div>
+        </div>
+        <div id="resultOverlay" class="overlay hidden">
+          <div class="overlay-card panel">
+            <span class="eyebrow">PERTEMPURAN SELESAI</span>
+            <h2 id="resultTitle">Menang</h2>
+            <p id="resultReason"></p>
+            <button id="backToLobby" type="button">Kembali ke Lobby</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="command-deck panel">
+        <div class="side-readout">
+          <span class="label">PIHAK</span>
+          <strong id="sideText">ALLIES</strong>
+        </div>
+        <div id="unitButtons" class="unit-buttons"></div>
+        <div class="tip"><kbd>1</kbd>–<kbd>4</kbd> kirim unit</div>
+      </section>
+      <p id="battleStatus" class="status battle-status" role="status"></p>
+    </section>
+  </main>
+
+  <script src="/game.js" defer></script>
+</body>
+</html>
